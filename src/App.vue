@@ -1,13 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters({ theme: 'getTheme' })
+  },
+  beforeMount () {
+    this.$store.dispatch('initTheme')
+  },
+  watch: {
+    theme (newTheme, oldTheme) {
+      if (newTheme === 'light') {
+        document.querySelector('html').classList.remove('dark')
+        document.querySelector('html').classList.remove('bg-gray-600')
+      } else {
+        document.querySelector('html').classList.add('dark')
+        document.querySelector('html').classList.add('bg-gray-600')
+      }
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

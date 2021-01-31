@@ -1,0 +1,10 @@
+/*! @import */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  html {
+    @apply dark:bg-gray-600
+  }
+}
