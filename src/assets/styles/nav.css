@@ -1,11 +1,9 @@
-@layer base {
-  .menu-link-text {
-    @apply rounded-md font-medium;
-  }
-  .menu-link {
-    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 menu-link-text;
-  }
-  .menu-link.router-link-exact-active {
-    @apply bg-gray-900 text-white menu-link-text;
-  }
+.menu-link-text {
+  @apply rounded-md font-medium;
+}
+.menu-link {
+  @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 menu-link-text;
+}
+.menu-link.router-link-exact-active {
+  @apply bg-gray-900 text-white menu-link-text;
 }

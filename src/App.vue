@@ -1,13 +1,18 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col min-h-screen">
+    <Nav />
     <router-view/>
   </div>
 </template>
 
 <script>
+import Nav from '@/components/Nav.vue'
 import { mapGetters } from 'vuex'
 export default {
   name: 'App',
+  components: {
+    Nav
+  },
   computed: {
     ...mapGetters({ theme: 'getTheme' })
   },

@@ -1,6 +1,8 @@
 /*! @import */
 @import "tailwindcss/base";
+@import "./nav.css";
 @import "tailwindcss/components";
+@import "./form.css";
 @import "tailwindcss/utilities";
 
 @layer base {
