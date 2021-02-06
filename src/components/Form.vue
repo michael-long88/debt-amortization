@@ -1,43 +1,39 @@
 <template>
-  <div class="container mx-auto">
+  <div>
+    <!-- TODO: reconfigur placeholder to ' ' and value to vuex getter if !== ' ' else '' -->
     <form @submit.prevent="calculatePaymentAmounts">
-        <div class="col-span-12 mx-6 md:mx-0">
+        <div class="mx-6 md:mx-0">
           <div class="form-float-div">
-            <input type="number" v-model.number="loanAmount" name="loanAmount" :placeholder="getLoanAmount" min="1" step=".01" class="form-float-input" required/>
-            <label for="loanAmount" class="form-float-label">Loan Amount</label>
+            <input type="number" v-model.number="loanAmount" ref="loanAmount" name="loanAmount" :placeholder="getLoanAmount" min="1" step=".01" class="form-float-input" required/>
+            <label for="loanAmount" @click="$refs.loanAmount.focus()" class="form-float-label">Loan Amount</label>
           </div>
           <div class="form-float-div">
-            <input type="number" v-model.number="interestRate" name="annualInterestRate" :placeholder="getAnnualInterestRate" min="1" step=".01" class="form-float-input" required/>
-            <label for="annualInterestRate" class="form-float-label">Annual Interest Rate</label>
+            <input type="number" v-model.number="interestRate" ref="annualInterestRate" name="annualInterestRate" :placeholder="getAnnualInterestRate" min="1" step=".01" class="form-float-input" required/>
+            <label for="annualInterestRate" @click="$refs.annualInterestRate.focus()" class="form-float-label">Annual Interest Rate</label>
           </div>
           <div class="form-float-div">
-            <input type="number" v-model.number="loanPeriod" name="loanPeriod" :placeholder="getLoanPeriod" min="1" step="1" class="form-float-input" required/>
-            <label for="loanPeriod" class="form-float-label">Loan Period in Years</label>
+            <input type="number" v-model.number="loanPeriod" ref="loanPeriod" name="loanPeriod" :placeholder="getLoanPeriod" min="1" step="1" class="form-float-input" required/>
+            <label for="loanPeriod" @click="$refs.loanPeriod.focus()" class="form-float-label">Loan Period in Years</label>
           </div>
           <div class="form-float-div">
-            <input type="number" v-model.number="numberOfPayments" name="numberOfPayments" :placeholder="getNumberOfPayments" min="1" step="1" max="12" class="form-float-input" required/>
-            <label for="numberOfPayments" class="form-float-label">Number of Payments Per Year</label>
+            <input type="number" v-model.number="numberOfPayments" ref="numberOfPayments" name="numberOfPayments" :placeholder="getNumberOfPayments" min="1" step="1" max="12" class="form-float-input" required/>
+            <label for="numberOfPayments" @click="$refs.numberOfPayments.focus()" class="form-float-label">Number of Payments Per Year</label>
           </div>
           <div class="form-float-div">
-            <input type="text" v-model="startDate" name="loanStartDate" :placeholder="getLoanStartDate" class="form-float-input" onfocus="(this.type='date')" onfocusout="(this.type='text')" required/>
-            <label for="loanStartDate" class="form-float-label">Loan Start Date</label>
+            <input type="text" v-model="startDate" ref="loanStartDate" name="loanStartDate" :placeholder="getLoanStartDate" class="form-float-input" onfocus="(this.type='date')" onfocusout="(this.type='text')" required/>
+            <label for="loanStartDate" @click="$refs.loanStartDate.focus()" class="form-float-label">Loan Start Date</label>
           </div>
           <div class="form-float-div">
-            <input type="number" v-model.number="extraPaymentAmount" name="optionalExtraPayments" :placeholder="getOptionalExtraPayments" min="1" step="any" class="form-float-input"/>
-            <label for="optionalExtraPayments" class="form-float-label">Optional Extra Payments</label>
+            <input type="number" v-model.number="extraPaymentAmount" ref="optionalExtraPayments" name="optionalExtraPayments" :placeholder="getOptionalExtraPayments" min="1" step="any" class="form-float-input"/>
+            <label for="optionalExtraPayments" @click="$refs.optionalExtraPayments.focus()" class="form-float-label">Optional Extra Payments</label>
           </div>
         </div>
-        <input type="submit" value="Submit">
+        <input
+          type="submit"
+          value="Calculate"
+          class="rounded-full bg-blue-600 font-bold text-white px-8 py-3 transition duration-300 ease-in-out hover:bg-blue-700 mr-6"
+        >
     </form>
-    <!-- <table v-if="payments">
-      <thead>
-        <tr v-for="header in Object.keys(calculatedPayments[0])" :key="header">
-          <th>
-            {{ header }}
-          </th>
-        </tr>
-      </thead>
-    </table> -->
   </div>
 </template>
 <script>
@@ -148,19 +144,19 @@ export default {
         payments.push({
           'Payment No.': rowNum,
           'Payment Date': `${currentYear}-${currentMonth}-${day}`,
-          'Beginning Balance': currentBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          'Scheduled Payment': monthlyPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          'Extra Payment': currentExtraPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          'Total Payment': totalPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          Principal: principal.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          Interest: interest.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          'Ending Balance': endingBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-          'Cumulative Interest': cumulativeInterest.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+          'Beginning Balance': currentBalance,
+          'Scheduled Payment': monthlyPayment,
+          'Extra Payment': currentExtraPayment,
+          'Total Payment': totalPayment,
+          Principal: principal,
+          Interest: interest,
+          'Ending Balance': endingBalance,
+          'Cumulative Interest': cumulativeInterest
         })
         currentBalance = endingBalance
         rowNum++
       }
-      this.setActualNumberOfPayments({ actualNumberOfPayments: rowNum })
+      this.setActualNumberOfPayments({ actualNumberOfPayments: rowNum - 1 })
       console.table(payments)
       this.payments = payments
       this.setPayments({ payments: payments })

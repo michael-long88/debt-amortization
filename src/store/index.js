@@ -13,7 +13,7 @@ export default new Vuex.Store({
     loanStartDate: ' ',
     optionalExtraPayments: ' ',
     payments: [],
-    scheduledPayment: '',
+    scheduledPayment: 0,
     scheduledNumberOfPayments: 0,
     actualNumberOfPayments: 0,
     totalEarlyPayments: 0,
@@ -148,19 +148,19 @@ export default new Vuex.Store({
       return state.payments
     },
     getScheduledPayment: state => {
-      return state.scheduledPayment
+      return state.scheduledPayment === 0 ? '-' : state.scheduledPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     },
     getScheduledNumberOfPayments: state => {
-      return state.scheduledNumberOfPayments
+      return state.scheduledNumberOfPayments === 0 ? '-' : state.scheduledNumberOfPayments
     },
     getActualNumberOfPayments: state => {
-      return state.actualNumberOfPayments
+      return state.actualNumberOfPayments === 0 ? '-' : state.actualNumberOfPayments
     },
     getTotalEarlyPayments: state => {
-      return state.totalEarlyPayments
+      return state.totalEarlyPayments === 0 ? '-' : state.totalEarlyPayments.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     },
     getTotalInterest: state => {
-      return state.totalInterest
+      return state.totalInterest === 0 ? '-' : state.totalInterest.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   },
   modules: {
