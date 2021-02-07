@@ -12,12 +12,24 @@ export default new Vuex.Store({
     numberOfPayments: ' ',
     loanStartDate: ' ',
     optionalExtraPayments: ' ',
-    payments: [],
+    payments: [{
+      'Payment No.': '-',
+      'Payment Date': '-',
+      'Beginning Balance': '-',
+      'Scheduled Payment': '-',
+      'Extra Payment': '-',
+      'Total Payment': '-',
+      Principal: '-',
+      Interest: '-',
+      'Ending Balance': '-',
+      'Cumulative Interest': '-'
+    }],
     scheduledPayment: 0,
     scheduledNumberOfPayments: 0,
     actualNumberOfPayments: 0,
     totalEarlyPayments: 0,
-    totalInterest: 0
+    totalInterest: 0,
+    paymentsCalculated: false
   },
   mutations: {
     SET_THEME (state, theme) {
@@ -59,6 +71,9 @@ export default new Vuex.Store({
     },
     SET_TOTAL_INTEREST (state, totalInterest) {
       state.totalInterest = totalInterest
+    },
+    SET_PAYMENTS_CALCULATED (state, paymentsCalculated) {
+      state.paymentsCalculated = paymentsCalculated
     }
   },
   actions: {
@@ -120,6 +135,9 @@ export default new Vuex.Store({
     },
     setTotalInterest ({ commit }, payload) {
       commit('SET_TOTAL_INTEREST', payload.totalInterest)
+    },
+    setPaymentsCalculated ({ commit }, payload) {
+      commit('SET_PAYMENTS_CALCULATED', payload.paymentsCalculated)
     }
   },
   getters: {
@@ -161,6 +179,9 @@ export default new Vuex.Store({
     },
     getTotalInterest: state => {
       return state.totalInterest === 0 ? '-' : state.totalInterest.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+    },
+    arePaymentsCalculated: state => {
+      return state.paymentsCalculated
     }
   },
   modules: {

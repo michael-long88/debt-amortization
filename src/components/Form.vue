@@ -91,7 +91,8 @@ export default {
       'setScheduledNumberOfPayments',
       'setActualNumberOfPayments',
       'setTotalEarlyPayments',
-      'setTotalInterest']),
+      'setTotalInterest',
+      'setPaymentsCalculated']),
     calculatePaymentAmounts: function () {
       this.setLoanAmount({ loanAmount: this.loanAmount })
       this.setAnnualInterestRate({ annualInterestRate: this.interestRate })
@@ -157,9 +158,9 @@ export default {
         rowNum++
       }
       this.setActualNumberOfPayments({ actualNumberOfPayments: rowNum - 1 })
-      console.table(payments)
       this.payments = payments
       this.setPayments({ payments: payments })
+      this.setPaymentsCalculated({ paymentsCalculated: true })
       const totalEarlyPayments = payments.reduce((acc, paymentRow) => {
         acc += paymentRow['Extra Payment']
         return acc
