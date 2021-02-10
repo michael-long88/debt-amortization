@@ -3,7 +3,7 @@
     <div class="col-start-2 col-span-2">
       <Form />
     </div>
-    <div class="col-end-8 col-span-2">
+    <div class="lg:relative col-end-8 col-span-2">
       <Summary />
     </div>
     <div class="col-span-8">

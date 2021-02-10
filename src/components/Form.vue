@@ -1,10 +1,9 @@
 <template>
   <div>
-    <!-- TODO: reconfigur placeholder to ' ' and value to vuex getter if !== ' ' else '' -->
     <form @submit.prevent="calculatePaymentAmounts">
         <div class="mx-6 md:mx-0">
           <div class="form-float-div">
-            <input type="number" v-model.number="loanAmount" ref="loanAmount" name="loanAmount" :placeholder="getLoanAmount" min="1" step=".01" class="form-float-input" required/>
+            <input type="number" v-model.number="loanAmount" ref="loanAmount" name="loanAmount" placeholder=' ' min="1" step=".01" class="form-float-input" required/>
             <label for="loanAmount" @click="$refs.loanAmount.focus()" class="form-float-label">Loan Amount</label>
           </div>
           <div class="form-float-div">
@@ -42,12 +41,12 @@ export default {
   name: 'Form',
   data () {
     return {
-      loanAmount: null,
-      interestRate: null,
-      loanPeriod: null,
-      numberOfPayments: null,
-      startDate: null,
-      extraPaymentAmount: null,
+      loanAmount: this.getLoanAmount === ' ' ? null : this.getLoanAmount,
+      interestRate: this.getAnnualInterestRate === ' ' ? null : this.getAnnualInterestRate,
+      loanPeriod: this.getLoanPeriod === ' ' ? null : this.getLoanPeriod,
+      numberOfPayments: this.getNumberOfPayments === ' ' ? null : this.getNumberOfPayments,
+      startDate: this.getLoanStartDate === ' ' ? null : this.getLoanStartDate,
+      extraPaymentAmount: this.getOptionalExtraPayments === ' ' ? null : this.getOptionalExtraPayments,
       payments: []
     }
   },

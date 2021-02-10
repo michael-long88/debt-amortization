@@ -47,15 +47,7 @@ export default {
           return acc
         }, {})
       }, [])
-      // console.table(payments)
       return payments
-      // return this.getPayments.map(payment => Object.keys(payment).map(header => {
-      //   if (nonCurrencyList.includes(header)) {
-      //     return payment[header]
-      //   } else {
-      //     return payment[header].toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-      //   }
-      // }))
     }
   }
 }
