@@ -1,4 +1,15 @@
 # debt-amortization
+This project was constructed using Vue.js and Tailwind CSS, and is designed to calculate monthly payments based on a number of factors:
+- Loan Amount
+- Interest Rate
+- Loan Period (in years)
+- Number of Payments (per year)
+- Loan Start Date
+- Any Extra Payments
+
+It also calculates the total amount of extra payments, as well as the total and cumulative interest.
+
+
 
 ## Project setup
 ```
