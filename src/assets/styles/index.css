@@ -7,6 +7,6 @@
 
 @layer base {
   html {
-    @apply dark:bg-gray-600
+    @apply bg-yellow-50 dark:bg-gray-600
   }
 }
