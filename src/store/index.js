@@ -9,6 +9,7 @@ export default new Vuex.Store({
     loanAmount: ' ',
     annualInterestRate: ' ',
     loanPeriodInYears: ' ',
+    loanPeriodInMonths: ' ',
     numberOfPayments: ' ',
     loanStartDate: ' ',
     optionalExtraPayments: ' ',
@@ -42,8 +43,11 @@ export default new Vuex.Store({
     SET_ANNUAL_INTEREST_RATE (state, annualInterestRate) {
       state.annualInterestRate = annualInterestRate
     },
-    SET_LOAN_PERIOD (state, loanPeriodInYears) {
+    SET_LOAN_PERIOD_YEARS (state, loanPeriodInYears) {
       state.loanPeriodInYears = loanPeriodInYears
+    },
+    SET_LOAN_PERIOD_MONTHS (state, loanPeriodInMonths) {
+      state.loanPeriodInMonths = loanPeriodInMonths
     },
     SET_NUMBER_OF_PAYMENTS (state, numberOfPayments) {
       state.numberOfPayments = numberOfPayments
@@ -106,8 +110,11 @@ export default new Vuex.Store({
     setAnnualInterestRate ({ commit }, payload) {
       commit('SET_ANNUAL_INTEREST_RATE', payload.annualInterestRate)
     },
-    setLoanPeriod ({ commit }, payload) {
-      commit('SET_LOAN_PERIOD', payload.loanPeriod)
+    setLoanPeriodYears ({ commit }, payload) {
+      commit('SET_LOAN_PERIOD_YEARS', payload.loanPeriodYears)
+    },
+    setLoanPeriodMonths ({ commit }, payload) {
+      commit('SET_LOAN_PERIOD_MONTHS', payload.setLoanPeriodMonths)
     },
     setNumberOfPayments ({ commit }, payload) {
       commit('SET_NUMBER_OF_PAYMENTS', payload.numberOfPayments)
@@ -150,8 +157,11 @@ export default new Vuex.Store({
     getAnnualInterestRate: state => {
       return state.annualInterestRate
     },
-    getLoanPeriod: state => {
+    getLoanPeriodYears: state => {
       return state.loanPeriodInYears
+    },
+    getLoanPeriodMonths: state => {
+      return state.loanPeriodInMonths
     },
     getNumberOfPayments: state => {
       return state.numberOfPayments
