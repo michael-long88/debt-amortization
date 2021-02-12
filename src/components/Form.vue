@@ -111,29 +111,28 @@ export default {
       const month = parseInt(splitDates[1])
       const day = parseInt(splitDates[2])
       let currentBalance = this.loanAmount
-      const extraPayment = this.extraPaymentAmount
+      let extraPayment = this.extraPaymentAmount
       let totalPayment = monthlyPayment
       let currentYear = year
       let cumulativeInterest = 0
       let rowNum = 1
       while (currentBalance > 0) {
         let currentMonth = Math.floor(month + (rowNum * (12 / this.numberOfPayments)))
-        // console.log('currentMonth: ', currentMonth)
         let yearAddition = 0
         if (currentMonth >= 13) {
           yearAddition = Math.floor(currentMonth / 12)
           yearAddition = currentMonth % 12 === 0 ? yearAddition - 1 : yearAddition
         }
-        // const yearAddition = Math.floor(currentMonth) % 12 === 0 ? 0 : Math.floor(currentMonth / 12)
-        // const yearAddition = currentMonth >= 13 ? Math.floor(currentMonth / 12) : 0
-        // console.log('yearAddition: ', yearAddition)
         currentYear = (year + yearAddition) === currentYear ? currentYear : year + yearAddition
         currentMonth = currentMonth >= 13 ? currentMonth % 12 : currentMonth
         currentMonth = currentMonth === 0 ? 12 : currentMonth
         let currentExtraPayment = 0
-        if (extraPayment && (extraPayment + monthlyPayment) < currentBalance) {
+        if (!extraPayment) {
+          extraPayment = 0
+        }
+        if (extraPayment + monthlyPayment < currentBalance) {
           currentExtraPayment = extraPayment
-        } else if (extraPayment && (currentBalance - monthlyPayment) > 0) {
+        } else if (currentBalance - monthlyPayment > 0) {
           currentExtraPayment = currentBalance - monthlyPayment
         }
         totalPayment = (extraPayment + monthlyPayment) < currentBalance ? monthlyPayment + extraPayment : currentBalance
