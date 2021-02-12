@@ -23,7 +23,7 @@
             <label for="numberOfPayments" @click="$refs.numberOfPayments.focus()" class="form-float-label">Number of Payments Per Year</label>
           </div>
           <div class="form-float-div">
-            <input type="text" v-model="startDate" ref="loanStartDate" name="loanStartDate" :placeholder="getLoanStartDate" class="form-float-input" onfocus="(this.type='date')" onfocusout="(this.type='text')" required/>
+            <input type="date" v-model="startDate" ref="loanStartDate" name="loanStartDate" :placeholder="getLoanStartDate" class="form-float-input" required/>
             <label for="loanStartDate" @click="$refs.loanStartDate.focus()" class="form-float-label">Loan Start Date</label>
           </div>
           <div class="form-float-div">
