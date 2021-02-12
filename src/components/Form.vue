@@ -50,7 +50,7 @@ export default {
       loanPeriodYears: this.getLoanPeriodYears === ' ' ? null : this.getLoanPeriodYears,
       loanPeriodMonths: this.getLoanPeriodMonths === ' ' ? null : this.getLoanPeriodMonths,
       numberOfPayments: this.getNumberOfPayments === ' ' ? null : this.getNumberOfPayments,
-      startDate: this.getLoanStartDate === ' ' ? null : this.getLoanStartDate,
+      startDate: this.getLoanStartDate === 'mm/dd/yyyy' ? null : this.getLoanStartDate,
       extraPaymentAmount: this.getOptionalExtraPayments === ' ' ? null : this.getOptionalExtraPayments,
       payments: []
     }

@@ -11,7 +11,7 @@ export default new Vuex.Store({
     loanPeriodInYears: ' ',
     loanPeriodInMonths: ' ',
     numberOfPayments: ' ',
-    loanStartDate: ' ',
+    loanStartDate: 'mm/dd/yyyy',
     optionalExtraPayments: ' ',
     payments: [{
       'Payment No.': '-',
