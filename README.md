@@ -9,6 +9,11 @@ This project was constructed using Vue.js and Tailwind CSS, and is designed to c
 
 It also calculates the total amount of extra payments, as well as the total and cumulative interest.
 
+## TODO
+* Add lender name
+* Add ability to add multiple debt payments
+  * Compile all debts to single CSV
+
 
 
 ## Project setup
