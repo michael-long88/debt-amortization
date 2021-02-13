@@ -23,14 +23,26 @@
             <label for="numberOfPayments" @click="$refs.numberOfPayments.focus()" class="form-float-label">Number of Payments Per Year</label>
           </div>
           <div class="form-float-div">
-            <input type="date" v-model="startDate" ref="loanStartDate" name="loanStartDate" :placeholder="getLoanStartDate" class="form-float-input" required/>
-            <label for="loanStartDate" @click="$refs.loanStartDate.focus()" class="form-float-label">Loan Start Date</label>
+            <Datepicker
+              v-model="startDate"
+              id="loanStartDate"
+              name="loanStartDate"
+              :placeholder="getLoanStartDate"
+              format='yyyy-MM-dd'
+              :required="true"
+              input-class='form-float-input'
+              wrapper-class='form-float-datepicker'
+              :calendar-button="true"
+              calendar-button-icon="fa fa-calendar"
+            />
+            <label for="loanStartDate" @click="document.getElementById('loanStartDate').focus()" class="form-float-label">Loan Start Date</label>
           </div>
           <div class="form-float-div">
             <input type="number" v-model.number="extraPaymentAmount" ref="optionalExtraPayments" name="optionalExtraPayments" :placeholder="getOptionalExtraPayments" min="1" step="any" class="form-float-input"/>
             <label for="optionalExtraPayments" @click="$refs.optionalExtraPayments.focus()" class="form-float-label">Optional Extra Payments</label>
           </div>
         </div>
+        <i class="fa fa-calendar" />
         <input
           type="submit"
           value="Calculate"
@@ -40,9 +52,13 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Form',
+  components: {
+    Datepicker
+  },
   data () {
     return {
       loanAmount: this.getLoanAmount === ' ' ? null : this.getLoanAmount,
@@ -100,12 +116,13 @@ export default {
       'setTotalInterest',
       'setPaymentsCalculated']),
     calculatePaymentAmounts: function () {
+      const loanStartDate = this.startDate.toISOString().split('T')[0]
       this.setLoanAmount({ loanAmount: this.loanAmount })
       this.setAnnualInterestRate({ annualInterestRate: this.interestRate })
       this.setLoanPeriodYears({ loanPeriodYears: this.loanPeriodYears })
       this.setLoanPeriodMonths({ loanPeriodMonths: this.loanPeriodMonths })
       this.setNumberOfPayments({ numberOfPayments: this.numberOfPayments })
-      this.setLoanStartDate({ loanStartDate: this.startDate })
+      this.setLoanStartDate({ loanStartDate: loanStartDate })
       this.setOptionalExtraPayments({ optionalExtraPayments: this.extraPaymentAmount })
       const payments = []
       const interestRate = this.interestRate / 100
@@ -116,7 +133,7 @@ export default {
       this.setScheduledNumberOfPayments({ scheduledNumberOfPayments: totalNumberOfPayments })
       const monthlyPayment = (this.loanAmount * rate) / (1 - ((1 + rate) ** (-1 * totalNumberOfPayments)))
       this.setScheduledPayment({ scheduledPayment: monthlyPayment })
-      const splitDates = this.startDate.split('-')
+      const splitDates = loanStartDate.split('-')
       const year = parseInt(splitDates[0])
       const month = parseInt(splitDates[1])
       const day = parseInt(splitDates[2])

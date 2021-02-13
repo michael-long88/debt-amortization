@@ -1,7 +1,9 @@
 /* https://notiz.dev/blog/floating-form-field-with-tailwindcss#floating-label */
 
 input:focus-within ~ label,
-input:not(:placeholder-shown) ~ label {
+input:not(:placeholder-shown) ~ label,
+.vdp-datepicker:focus-within ~ label,
+.vdp-datepicker:not(:placeholder-shown) ~ label {
   @apply transform scale-75 -translate-y-10;
 }
 
@@ -15,6 +17,10 @@ input:focus-within ~ label {
 
 .form-float-input {
   @apply block w-full appearance-none focus:outline-none focus-within:border-blue-500 bg-transparent rounded-lg dark:text-white;
+}
+
+.form-float-datepicker {
+  @apply block w-full appearance-none focus:outline-none focus-within:border-blue-500 bg-transparent rounded-lg;
 }
 
 .form-float-label {
