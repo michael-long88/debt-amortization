@@ -6,6 +6,9 @@
     <div class="lg:relative col-end-8 col-span-2">
       <Summary />
     </div>
+    <div class="col-start-3 col-span-4">
+      <DebtChart v-show="arePaymentsCalculated" />
+    </div>
     <div class="col-span-8">
       <SummaryTable v-show="arePaymentsCalculated" />
     </div>
@@ -17,13 +20,15 @@
 import Form from '@/components/Form'
 import Summary from '@/components/Summary'
 import SummaryTable from '@/components/SummaryTable'
+import DebtChart from '@/components/DebtChart'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
     Form,
     Summary,
-    SummaryTable
+    SummaryTable,
+    DebtChart
   },
   computed: {
     ...mapGetters([
