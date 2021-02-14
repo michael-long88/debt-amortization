@@ -11,6 +11,7 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 // eslint-disable-next-line camelcase
 // import am4themes_dark from '@amcharts/amcharts4/themes/dark'
 am4core.useTheme(am4themes_animated)
+am4core.options.autoDispose = true
 // am4core.useTheme(am4themes_dark)
 
 export default {
