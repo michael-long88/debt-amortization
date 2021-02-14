@@ -23,19 +23,13 @@ export default {
   },
   methods: {
     renderChart () {
-      // TODO: Figure out issue with toolip not showing
-      // TODO: Figure out issue with line colors not adhering to set colors
       if (this.chart) {
         this.chart.dispose()
       }
       if (this.arePaymentsCalculated) {
         const chart = am4core.create(this.$refs.chartDiv, am4charts.XYChart)
         chart.colors.list = [am4core.color('#028FDB'), am4core.color('#A813F2'), am4core.color('#D96B52')]
-        // const chartData = this.getPayments.map(p => {
-        //   return { ...p, 'Payment No.': String(p['Payment No.']) }
-        // })
         chart.data = this.getPayments
-        // console.log(JSON.stringify(chart.data))
 
         // create axes
         const paymentAxis = chart.xAxes.push(new am4charts.ValueAxis())
@@ -79,9 +73,6 @@ export default {
         series.tooltip.pointerOrientation = 'vertical'
 
         chart.legend = new am4charts.Legend()
-
-        // eslint-disable-next-line no-unused-vars
-        const axisTooltip = paymentAxis.tooltip
 
         // Add cursor
         chart.cursor = new am4charts.XYCursor()
